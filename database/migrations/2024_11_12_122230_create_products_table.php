@@ -13,8 +13,15 @@ return new class extends Migration
 {
     Schema::create('products', function (Blueprint $table) {
         $table->id();
-        $table->string('name');
-        $table->decimal('price', 8, 2);
+        $table->string('link');
+        $table->string('content');
+        $table->string('remarks');
+        $table->string('views');
+        $table->string('comment');
+        $table->string('like');
+        $table->string('link_clicked');
+        $table->string('share');
+        $table->string('save');
         $table->timestamps();
     });
 }

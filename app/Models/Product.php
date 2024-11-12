@@ -9,7 +9,14 @@ class Product extends Model
     //
 
     protected $fillable = [
-        "name",
-        "price"
+        "link",
+        "content",
+        "remarks",
+        "views",
+        "comment",
+        "like",
+        "link_clicked",
+        "share",
+        "save"
     ];
 }
