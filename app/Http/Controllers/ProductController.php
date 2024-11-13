@@ -101,12 +101,13 @@ class ProductController extends Controller
     }
 
 
-     public function destroy(Request $request){
-        $validator = validator($request->all(), [
-            "id" => "required"
+    public function destroy(Request $request){
+        $data = $request->all();
+        $validator = validator($data, [
+            'id' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return response()->json([
                 "ok" => false,
                 "message" => "Request didn't pass validation",
@@ -114,12 +115,16 @@ class ProductController extends Controller
             ], 400);
         }
 
-        $validated = $validator->validated();
-        $product = Product::findOrFail($validated["id"]);
 
-        $product->delete();
+        
+        if(Product::where('id',$data['id'])->delete()){
+            return response()->json([
+                "message" => "Deleted successfully"
+            ], 200);
+        }
+
         return response()->json([
-            "message" => "Deleted successfully"
-        ], 200);
-     }
+            "message" => "Deleted failed"
+        , 400]);
+    }
 }
